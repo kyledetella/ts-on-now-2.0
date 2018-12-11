@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "name": "ts-on-now-2.0",
+  "alias": "kdd-ts2",
+  "builds": [{ "src": "dist/index.js", "use": "@now/node-server" }],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/dist/$1"
+    }
+  ]
+}
