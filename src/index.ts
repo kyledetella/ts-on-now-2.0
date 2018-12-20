@@ -1,42 +1,23 @@
-import { ApolloServer, gql } from "apollo-server-express";
-import * as bodyParser from "body-parser";
-import * as express from "express";
+import { ApolloServer, gql } from "apollo-server-micro";
 
 const typeDefs = gql`
   type Query {
-    hello: String
+    sayHello: String
   }
 `;
 
-// Provide resolver functions for your schema fields
 const resolvers = {
   Query: {
-    hello: () => "Hello world!"
+    sayHello() {
+      return "Hello World!";
+    }
   }
 };
 
-const server = new ApolloServer({ typeDefs, resolvers, introspection: true });
-
-const { PORT = 3022 } = process.env;
-
-const app = express();
-
-app.use(bodyParser.json());
-
-app.get("/", (_, res) => {
-  res.json({ data: `${Date.now()}` });
+const apolloServer = new ApolloServer({
+  typeDefs,
+  resolvers,
+  // Allow graphql client to run introspection query. Don't do this in prod.
+  introspection: true
 });
-
-app.post("/data", (req, res) => {
-  res.json({
-    body: req.body,
-    status: "OK"
-  });
-});
-
-server.applyMiddleware({ app });
-
-// tslint:disable-next-line:no-console
-app.listen(PORT, () => console.log(`__RUNNING__ @ ${PORT}`));
-
-export default app;
+export default apolloServer.createHandler();
