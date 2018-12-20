@@ -1,5 +1,21 @@
+import { ApolloServer, gql } from "apollo-server-express";
+import * as bodyParser from "body-parser";
 import * as express from "express";
-import bodyParser = require("body-parser");
+
+const typeDefs = gql`
+  type Query {
+    hello: String
+  }
+`;
+
+// Provide resolver functions for your schema fields
+const resolvers = {
+  Query: {
+    hello: () => "Hello world!"
+  }
+};
+
+const server = new ApolloServer({ typeDefs, resolvers, introspection: true });
 
 const { PORT = 3022 } = process.env;
 
@@ -17,6 +33,8 @@ app.post("/data", (req, res) => {
     status: "OK"
   });
 });
+
+server.applyMiddleware({ app });
 
 // tslint:disable-next-line:no-console
 app.listen(PORT, () => console.log(`__RUNNING__ @ ${PORT}`));
