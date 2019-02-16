@@ -23,13 +23,13 @@
     "nodemon": "^1.18.8",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
-    "tslint-config-prettier": "^1.17.0",
-    "typescript": "^3.2.2"
+    "tslint-config-prettier": "^1.17.0"
   },
   "dependencies": {
-    "apollo-server-express": "^2.3.1",
+    "apollo-server-express": "^2.4.2",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "graphql": "^14.0.2"
+    "graphql": "^14.0.2",
+    "typescript": "^3.3.3"
   }
 }

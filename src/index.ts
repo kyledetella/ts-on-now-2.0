@@ -11,7 +11,7 @@ const typeDefs = gql`
 // Provide resolver functions for your schema fields
 const resolvers = {
   Query: {
-    hello: () => "Hello world!"
+    hello: () => "Hello world (ts)!"
   }
 };
 
@@ -23,14 +23,14 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.get("/", (_, res) => {
+app.get("/", (_: any, res: any) => {
   res.json({ data: `${Date.now()}` });
 });
 
 app.post("/data", (req, res) => {
   res.json({
     body: req.body,
-    status: "OK"
+    status: "OK (ts)"
   });
 });
 
